@@ -3,8 +3,14 @@
 <head>
     <title>AngularJS V.1</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+    <script>
+        function NameCtrl($scope){
+            $scope.name = "Abdullilah";
+            $scope.surname = "Alhaj Younes";
+        }
+    </script>
 </head>
-<body>
+<body ng-controller="NameCtrl">
 
     <div>Name: <input ng-model="name" type="text"/></div>
     <div>Surname: <input ng-model="surname" type="text"/></div>
