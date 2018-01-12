@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="nameApp">
 <head>
     <title>AngularJS V.1</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
     <script>
-        function NameCtrl($scope){
+        var nameApp = angular.module('nameApp', []);
+        nameApp.controller('NameCtrl', function($scope){
             $scope.name = "Abdullilah";
             $scope.surname = "Alhaj Younes";
-        }
+        });
     </script>
 </head>
 <body ng-controller="NameCtrl">
