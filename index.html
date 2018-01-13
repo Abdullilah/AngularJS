@@ -7,30 +7,21 @@
         var nameApp = angular.module('nameApp', []);
         nameApp.controller('NameCtrl', function($scope){
             $scope.newName = '';
-            $scope.names = ['Sami', 'Fadi', 'David'];
-            $scope.addName = function(){
-                var i = $scope.names.indexOf($scope.newName);
-                console.log(i);
-                if($scope.newName != null && $scope.newName != '' & i ==-1){
-                    $scope.names.push($scope.newName);
-                    $scope.newName = '';
-                }
-            }
-            $scope.removeName = function(name){
-                var i = $scope.names.indexOf(name);
-                $scope.names.splice(i,1);
-            }
+            $scope.countries = [
+                {'name': 'Syrian', 'population': '30000000'},
+                {'name': 'Poland', 'population': '45000000'},
+                {'name': 'Sudi Arabia', 'population': '32000000'},
+                {'name': 'UAE', 'population': '9000000'}
+            ];
+            
         });
     </script>
 </head>
 <body ng-controller="NameCtrl">
 
     <ul>
-        <li ng-repeat="name in names">{{name}} <a href="" ng-click="removeName(name)">Remove</a></li>
+        <li ng-repeat="country in countries">{{country.name}} with Population: {{country.population}}</li>
     </ul>
-    <form ng-submit="addName()">
-        <input type="text" ng-model="newName">
-        <input type="submit" value="Add Name">
-    </form>
+    
 </body>
 </html>
