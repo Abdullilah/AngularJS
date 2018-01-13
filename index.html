@@ -19,6 +19,16 @@
 </head>
 <body ng-controller="NameCtrl">
 
+    <table>
+        <tr>
+            <th>Country</th>
+            <th>Population</th>
+        </tr>
+        <tr ng-repeat="country in countries">
+            <td>{{country.name}}</td>
+            <td>{{country.population}}</td>
+        </tr>
+    </table>
     <ul>
         <li ng-repeat="country in countries">{{country.name}} with Population: {{country.population}}</li>
     </ul>
