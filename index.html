@@ -9,10 +9,16 @@
             $scope.newName = '';
             $scope.names = ['Sami', 'Fadi', 'David'];
             $scope.addName = function(){
-                if($scope.newName != null && $scope.newName != ''){
+                var i = $scope.names.indexOf($scope.newName);
+                console.log(i);
+                if($scope.newName != null && $scope.newName != '' & i ==-1){
                     $scope.names.push($scope.newName);
                     $scope.newName = '';
                 }
+            }
+            $scope.removeName = function(name){
+                var i = $scope.names.indexOf(name);
+                $scope.names.splice(i,1);
             }
         });
     </script>
@@ -20,7 +26,7 @@
 <body ng-controller="NameCtrl">
 
     <ul>
-        <li ng-repeat="name in names">{{name}}</li>
+        <li ng-repeat="name in names">{{name}} <a href="" ng-click="removeName(name)">Remove</a></li>
     </ul>
     <form ng-submit="addName()">
         <input type="text" ng-model="newName">
