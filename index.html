@@ -9,6 +9,14 @@
             http.get('countries.json').success(function(data){
                 scope.countries = data;
             });
+            
+            scope.filterBy = 'population';
+            scope.reverse = false;
+            scope.changeFilter = function(filtering){
+                scope.filterBy = filtering;
+                scope.reverse = !scope.reverse;
+            }
+            
         }]);
         
         
@@ -19,10 +27,10 @@
     Filter: <input type="text" ng-model="query">
     <table>
         <tr>
-            <th>Country</th>
-            <th>Population</th>
+            <th><a href="" ng-click="changeFilter('country')">Country</a></th>
+            <th><a href="" ng-click="changeFilter('population')">Population</a></th>
         </tr>
-        <tr ng-repeat="country in countries | filter:query | orderBy:'population'"><!--orderBy:'-population'-->
+        <tr ng-repeat="country in countries | filter:query | orderBy:filterBy:reverse"><!--orderBy:'-population'-->
             <td>{{country.name}}</td>
             <td>{{country.population}}</td>
         </tr>
