@@ -10,7 +10,8 @@
             $scope.names = ['Sami', 'Fadi', 'David'];
             $scope.addName = function(){
                 if($scope.newName != null && $scope.newName != ''){
-                    $scope.names.push($scope.newName);    
+                    $scope.names.push($scope.newName);
+                    $scope.newName = '';
                 }
             }
         });
