@@ -1,13 +1,31 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="nameApp">
 <head>
     <title>AngularJS V.1</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
+    <script>
+        var nameApp = angular.module('nameApp', []);
+        nameApp.controller('NameCtrl', function($scope, $http){
+            $http.get('countries.json').success(function(data){
+                $scope.countries = data;
+            });
+        });
+        
+        
+    </script>
 </head>
-<body>
+<body ng-controller="NameCtrl">
 
-    <span>Name: </span><input ng-model="name" type="text"/>
-    <p>Hello: {{name}}</p>
+    <table>
+        <tr>
+            <th>Country</th>
+            <th>Population</th>
+        </tr>
+        <tr ng-repeat="country in countries">
+            <td>{{country.name}}</td>
+            <td>{{country.population}}</td>
+        </tr>
+    </table>
     
 </body>
 </html>
