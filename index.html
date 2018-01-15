@@ -3,46 +3,41 @@
 <head>
     <title>AngularJS V.1</title>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular-route.min.js"></script>
     <script>
-        var nameApp = angular.module('nameApp', ['ngRoute']);
+        var nameApp = angular.module('nameApp', []);
         
-        nameApp.config(function($routeProvider){
-            $routeProvider
-            .when('/', {
-                template: `
-                    <ul>
-                        <li ng-repeat='country in countries'>{{country.name}}</li>
-                    </ul>
-                `, 
-                controller: 'NameCtrl'
-            })
-            .when('/:anotherLink', {
-                template: '<h1>{{newCountry.anotherLink}}</h1>', 
-                controller: 'ConsoleCtrl'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
-        });
-        
-        nameApp.controller('NameCtrl', ['$scope', '$http', function(scope, http){
-            http.get('countries.json').success(function(data){
-                scope.countries = data;
-            });
+        nameApp.factory('dataFactory', ['$http', function($http){
+            
+            var dataFactory = {};
+
+            dataFactory.getCountries = function () {
+                return $http.get('countries.json');
+            };
+            
+            return dataFactory;
         }]);
         
-        nameApp.controller('ConsoleCtrl', ['$scope', '$routeParams', function(scope, routeParams){
-            scope.newCountry = routeParams;
-            console.log(scope.newCountry);
+        nameApp.controller('NameCtrl', ['$scope','dataFactory', function($scope, dataFactory){
+            dataFactory.getCountries().success(function(data){
+                $scope.countries = data;
+            });
         }]);
         
         
     </script>
 </head>
-<body>
+<body ng-controller="NameCtrl">
 
-   <div ng-view></div>
+    <table>
+        <tr>
+            <th>Country</th>
+            <th>Population</th>
+        </tr>
+        <tr ng-repeat="country in countries">
+            <td>{{country.name}}</td>
+            <td>{{country.population}}</td>
+        </tr>
+    </table>
     
 </body>
 </html>
