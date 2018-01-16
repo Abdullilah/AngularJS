@@ -17,10 +17,13 @@
             return dataFactory;
         }]);
         
-        nameApp.controller('NameCtrl', ['$scope','dataFactory', function($scope, dataFactory){
-            dataFactory.getCountries().success(function(data){
-                $scope.countries = data;
-            });
+        nameApp.controller('NameCtrl', ['$scope','dataFactory', '$log', function(scope, dataFactory, log){
+            dataFactory.getCountries()
+                .then(function(response){
+                    scope.countries = response.data;
+                }, function(error){
+                    log.info(error);
+                });
         }]);
         
         
